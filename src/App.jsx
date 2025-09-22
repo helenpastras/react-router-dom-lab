@@ -1,7 +1,49 @@
+
 import { useState } from 'react'
+import { useNavigate } from 'react-router';
+import { Route } from 'react-router';
+import { Routes } from 'react-router';
+
+import NavBar from './components/NavBar/NavBar';
+import MailboxForm from './components/MailboxForm/MailboxForm.jsx';
+import MailboxList from './components/MailboxList/MailboxList.jsx';
+import MailboxDetails from './components/MailboxDetails/MailboxDetails.jsx';
+
+
 import './App.css'
 
-function App() {
-  return <h1>Hello world!</h1>;
+
+
+const App = () => {
+
+  const initialState = [
+  { _id: 1, boxSize: 'Small', boxOwner: 'Alex' },
+  { _id: 2, boxSize: 'Large', boxOwner: 'Jordan' },
+];
+
+const [mailboxes, setMailboxes] = useState(initialState);
+  const addBox = (formData) => {
+    const newMailbox = {
+    _id: mailboxes.length +1, 
+    ...formData,
+  }
+  setMailboxes([...mailboxes, newMailbox]);
+  };
+
+
+
+  return (
+    <>
+      <NavBar />
+      <h1>Reactville Post Office</h1>
+      <Routes>
+        <Route path="/" element={<main><h2>Post Office</h2></main>} />
+        <Route path="/mailboxes" element={<MailboxList mailboxes={mailboxes} />} />
+        <Route path="/new-mailbox" element={<MailboxForm addBox={addBox} />} />
+        <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailboxes} />} />
+      </Routes>
+    </>
+    )
 };
+
 export default App
