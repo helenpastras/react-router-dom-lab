@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 const NavBar = () => {
@@ -14,6 +14,9 @@ const NavBar = () => {
         </li>
         <li> 
           <Link to='/new-mailbox'>New Mailbox</Link>
+        </li>
+        <li> 
+          <Link to='/new-letter'>New Letter</Link>
         </li>
       </ul>
 

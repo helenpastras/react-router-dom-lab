@@ -8,6 +8,7 @@ import NavBar from './components/NavBar/NavBar';
 import MailboxForm from './components/MailboxForm/MailboxForm.jsx';
 import MailboxList from './components/MailboxList/MailboxList.jsx';
 import MailboxDetails from './components/MailboxDetails/MailboxDetails.jsx';
+import LetterForm from './components/LetterForm/LetterForm.jsx';
 
 
 import './App.css'
@@ -30,6 +31,12 @@ const [mailboxes, setMailboxes] = useState(initialState);
   setMailboxes([...mailboxes, newMailbox]);
   };
 
+ const [letters, setLetters] = useState([]);
+
+const addLetter = (formData) => {
+  setLetters([...letters, formData]);
+};
+
 
 
   return (
@@ -40,7 +47,8 @@ const [mailboxes, setMailboxes] = useState(initialState);
         <Route path="/" element={<main><h2>Post Office</h2></main>} />
         <Route path="/mailboxes" element={<MailboxList mailboxes={mailboxes} />} />
         <Route path="/new-mailbox" element={<MailboxForm addBox={addBox} />} />
-        <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailboxes} />} />
+        <Route path="/mailboxes/:mailboxId" element={<MailboxDetails mailboxes={mailboxes} letters={letters} />}/>
+        <Route path="/new-letter" element={<LetterForm mailboxes={mailboxes} addLetter={addLetter} />} />
       </Routes>
     </>
     )
